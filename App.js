@@ -13,6 +13,8 @@ import { SearchBar } from '@rneui/themed'
 import tw from "twrnc";
 import { KeyboardAwareFlatList, KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import LoginScreen from './screens/Login/LoginScreen'
+import Signup from './screens/Signup/Signup';
+import ForgotPasswrord from './screens/ForgotPassword.js/ForgotPasswrord';
 // flex box is in column for react native
 
 // STEPS:
@@ -35,6 +37,18 @@ export default function App() {
             <Stack.Screen          
             name="LoginScreen" 
             component={LoginScreen}
+            options={{
+              headerShown:false,
+            }}/>
+            <Stack.Screen          
+            name="Signup" 
+            component={Signup}
+            options={{
+              headerShown:false,
+            }}/>
+            <Stack.Screen          
+            name="ForgotPassword" 
+            component={ForgotPasswrord}
             options={{
               headerShown:false,
             }}/>
