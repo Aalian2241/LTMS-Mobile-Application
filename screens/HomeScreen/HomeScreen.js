@@ -16,11 +16,11 @@ const HomeScreen = () => {
   const dispatch = useDispatch();
   return (
     <SafeAreaView style={tw`bg-white h-full`}>
-      <View style={tw`p-4`}>
+      <View style={tw`p-4 border-b`}>
         <Image
             style = {{
-              width:100,
-              height:90,
+              width:120,
+              height:120,
               resizeMode:"contain"
             }}
             source = {{ uri: "https://iili.io/yliv5X.jpg"}}
@@ -64,9 +64,12 @@ export default HomeScreen
 
 const TextBoxstyle = StyleSheet.create({
   container:{
-      backgroundColor:"white",
-      paddingTop:12,
-      marginTop:10,
+      backgroundColor:"green",
+      paddingTop:2,
+      paddingRight:2,
+      paddingLeft:2,
+      marginTop:2,
+      marginLeft:1,
       marginBottom:10,
       flex:0,
       border: "solid",

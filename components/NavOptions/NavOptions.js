@@ -11,21 +11,20 @@ const data = [
     {
         id:"1",
         title:"Order Ride",
-        image: "https://iili.io/yeTqvV.png",
+        image: "https://iili.io/H9qBrZX.png",
         screen: "MapScreen"
     },
     {
         id:"2",
-        title:"Order Food",
-        image: "https://links.papareact.com/28w",
-        screen: "EatScreen"
+        title:"Rides Info",
+        image: "https://iili.io/H9qTVUu.png",
+        screen: "RidesInfo"
     },
 ];
 
 const NavOptions = ({props}) => {
 
     const origin = useSelector(selectOrigin);
-    console.log(props);
     const navigation = useNavigation();
     return(
         <KeyboardAwareFlatList  
@@ -39,9 +38,10 @@ const NavOptions = ({props}) => {
                 onPress={()=> {
                     navigation.navigate(item.screen)}}
                     
-                style={tw` p-2 pl-3 pb-8 pt-3 bg-green-700 mr-4 w-40 `}
+                style={tw` p-2 pl-3 pb-8 pt-3 bg-green-800 mr-4 w-40 `}
                 >
-                    <View>
+                    
+                    <View style={tw`bg-`}>
                         <Image
                             style={{
                                 width:100,
@@ -52,16 +52,15 @@ const NavOptions = ({props}) => {
                                 uri: item.image
                             }}
                         />
-                        <Text style={tw`mt-2 text-lg font-semibold`}>{item.title}</Text>
+                        <Text style={tw`mt-2 text-white  font-extrabold text-2xl`}>{item.title}</Text>
                         <Icon 
-                            style={tw`rounded-full w-9 mt-2 bg-black p-1`}
-                            color="white" name='arrowright' type='antdesign'/>
+                            style={tw`rounded-2xl w-9 mt-2 bg-white p-1`}
+                            color="green" name='arrowright' type='antdesign'/>
                     </View>
                 </TouchableOpacity>
         )}
         />
     );
-
 }
 
 export default NavOptions

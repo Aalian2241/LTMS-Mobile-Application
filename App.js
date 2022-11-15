@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, KeyboardAvoidingView, Platform } from 'react-na
 import { Provider } from 'react-redux';
 import HomeScreen from './screens/HomeScreen/HomeScreen';
 import MapScreen from "./screens/MapScreen/MapScreen";
-import EatScreen from './screens/EatScreen/EatScreen';
 import { store } from './store';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer, StackActions } from '@react-navigation/native';
@@ -15,6 +14,8 @@ import { KeyboardAwareFlatList, KeyboardAwareScrollView } from 'react-native-key
 import LoginScreen from './screens/Login/LoginScreen'
 import Signup from './screens/Signup/Signup';
 import ForgotPasswrord from './screens/ForgotPassword.js/ForgotPasswrord';
+import RidesInfo from './screens/RidesInfo/RidesInfo';
+import { Button } from 'react-native-elements';
 // flex box is in column for react native
 
 // STEPS:
@@ -66,11 +67,18 @@ export default function App() {
               gestureEnabled:true,
             }}/>
             <Stack.Screen 
-            name="EatScreen" 
-            component={EatScreen}
+            name="RidesInfo" 
+            component={RidesInfo}
             options={{
+              headerStyle: {
+                backgroundColor: 'green'
+              },
               headerShown:true,
+              headerTitle:"Rides Info",
+            
+              
             }}/>
+            
           </Stack.Navigator> 
          {/* <HomeScreen/> */}
          </KeyboardAvoidingView>

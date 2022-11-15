@@ -1,5 +1,5 @@
 import { KeyboardAvoidingView, StyleSheet, Text, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
 import tw from "twrnc";
@@ -14,19 +14,6 @@ const LoginScreen = () => {
   const [email,setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   
-
-  const handleSignup=()=>{
-    console.log(email)
-    createUserWithEmailAndPassword(auth, email,password)
-    .then(useCredentials =>{
-      const user = useCredentials.user;
-      alert("Successful")
-    })
-    .catch( error=> {
-      
-      alert(error.message)})
-  }
-
   const handleLogin=()=>{
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
@@ -40,7 +27,16 @@ const LoginScreen = () => {
       alert(error.message);
   });
   }
-
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user=>{
+      if (user){
+        navigation.navigate("HomeScreen")
+      }
+      
+    })
+    return unsubscribe
+  }, [])
+  
   return (
   <SafeAreaView style={tw`flex-1 bg-white`}>
     
@@ -55,11 +51,11 @@ const LoginScreen = () => {
             source = {{ uri: "https://iili.io/yliv5X.jpg"}}
         />
 
-        <View style={tw`justify-center`}>
+        <View style={tw`justify-center px-30`}>
           <Text style={tw`text-center text-2xl font-bold text-green-700`}>
             Welcome Back!
           </Text>
-          <Text style={tw`text-center text-lg font-bold text-green-500`}>
+          <Text style={tw`text-center text-base font-bold text-green-500`}>
             We're excited to see you again! Lets Ride!
           </Text>
           <TextInput

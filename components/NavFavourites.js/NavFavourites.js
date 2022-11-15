@@ -27,9 +27,10 @@ const NavFavourites = () => {
         keyExtractor={(item)=>item.id }
         data = {data}
         renderItem = { ({item:{location, destination,icon}})=>(
+
             <TouchableOpacity 
             // onPress={()=> navigation.navigate(item.screen)}
-            style={tw`flex-row items-center p-4`}
+            style={tw`flex-row items-center p-4 border-lime-900  border-b`}
             >
                 <Icon
                   style={tw`mr-4 rounded-full bg-green-700 p-3`}

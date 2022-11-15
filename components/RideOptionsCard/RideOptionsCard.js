@@ -18,14 +18,14 @@ const RideOptionsCard = () => {
         id: "Uber-X-123",
         title: "Mini Truck",
         multiplier: 1,
-        image:"https://iili.io/ylvWxI.png" 
+        image:"https://iili.io/H9qC6OB.png" 
         //"https://iili.io/ylgRkJ.png"
     },
     {
         id: "Uber-XL-456",
         title: "Truck",
         multiplier: 1.2,
-        image: "https://iili.io/ylvWxI.png"
+        image: "https://iili.io/H9qC6OB.png"
         
         //"https://iili.io/ylvncb.png"
     },
@@ -33,7 +33,7 @@ const RideOptionsCard = () => {
         id: "Uber-LUX-123",
         title: "Heavy Truck",
         multiplier: 1.75,
-        image: "https://iili.io/ylvWxI.png"
+        image: "https://iili.io/H9qC6OB.png"
     },
 ]
 
