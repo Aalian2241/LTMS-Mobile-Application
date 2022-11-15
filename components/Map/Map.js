@@ -14,14 +14,7 @@ const Map =  () => {
     const dispatch = useDispatch();
     const {height, width} = Dimensions.get('window');
     const halfHeight = height / 2;
-    var config={
-      url:`https://maps.googleapis.com/maps/api/distancematrix/json?origins=Washington%2C%20DC&destinations=New%20York%20City%2C%20NY&units=imperial&key=AIzaSyDyRLpbLiE7n3Z-NkKcukXdtla0nyeS71I`,
-      headers:{
-        Accept:"application/json",
-        Connection:"keep-alive"
-      },
-      method:'get'
-    }
+  
 
     const mapRef = useRef(null);
     useEffect(
@@ -37,7 +30,7 @@ const Map =  () => {
     useEffect(()=>{
       if (!origin || !destination) return;
       const getTravelTime= async()=>{
-        fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?origins=${origin.description}&destinations=${destination.description}&units=imperial&key=AIzaSyDyRLpbLiE7n3Z-NkKcukXdtla0nyeS71I`)
+        fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?origins=${origin.description}&destinations=${destination.description}&units=imperial&key=${GOOGLE_MAPS_APIKEY}`)
         .then((res)=> res.json())
         .then((res)=>{
           console.log(res)
