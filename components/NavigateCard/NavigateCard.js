@@ -86,7 +86,7 @@ export default NavigateCard
 const TextBoxstyle = StyleSheet.create({
     container:{
         
-        paddingTop:20,
+        paddingTop:0,
         flex:0
     },
     textInput:{

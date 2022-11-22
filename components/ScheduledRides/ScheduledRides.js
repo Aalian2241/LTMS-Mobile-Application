@@ -1,46 +1,66 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { ActivityIndicator, FlatList, StyleSheet, Text, View } from 'react-native'
+import React, { useState } from 'react'
 import { KeyboardAwareFlatList } from 'react-native-keyboard-aware-scroll-view'
 import tw from 'twrnc';
-import { Image } from 'react-native-elements';
+import { useDispatch, useSelector } from 'react-redux';
+import { Button, Icon, Image } from 'react-native-elements';
+import { useNavigation } from '@react-navigation/native';
+import {selectDestination, selectProgress, setDestination, setJobNo, setJobStatus, setOrigin, setProgress} from "../../slices/navSlice.js";
+import { TouchableOpacity } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
+import confirmTrip from './confirmTrip.js';
+import scheduledTrips from './scheduledTrips.js';
+
 
 
 const RideHistory = () => {
-const data = [
+    const progress = useSelector(selectProgress)
+    const destination = useSelector(selectDestination)
+    const navigation = useNavigation();
+    const dispatch = useDispatch();
+    console.log(progress);
+
+    const data = [
         {
-          id:"1",
-          time: "TBD",
-          amount: "USD 23",
-          origin: "Lahore, Punjab, Pakistan",
-          destination: "Karachi, Sindh, Pakistan"
+          id:"LHASDIEAP1028",
+          scheduled_at: "20 November, 2022",
+          origin: "Lahore, Pakistan",
+          destination: "Karachi, Sindh, Pakistan",
+          status:"assigned",
+          load_type:"Heavy",
         }, 
         {
-          id:"2",
-          time: "TBD",
-          amount: "USD 35",
-          origin: "Peshawar, KPK, Pakistan",
-          destination: "Lahore, Punjab, Pakistan"
+          id:"LHPSADOPQ1028",
+          scheduled_at: "29 November, 2022",
+          origin: "Peshawar,Pakistan",
+          destination: "Lahore, Punjab, Pakistan",
+          status:"assigned",
         }
       ]
-
+      const Stack = createStackNavigator();
   return (
-    <View style={tw`flex-row justify-between justify-items-center`}>
-        <KeyboardAwareFlatList
+    <View style={tw`flex-row justify-between `}>
+        <FlatList
         keyExtractor={(item)=>item.id}
         
         data = {data}
         renderItem={({item})=>(
         
-        <View style={tw`flex border-green-700 border-b`}>
+        <TouchableOpacity 
+        onPress={()=>navigation.navigate('ConfirmTrip', item)}
+        style={tw`flex border-green-700 border-b`}>
+            
             <View style={tw`flex-row justify-between pb-4`}>
                 
-                <Text style={tw`text-left pt-2 px-2 font-semibold text-xl border-black`}>
-                {item.time}
+                <Text style={tw`text-green-700 text-left pt-2 px-2 font-bold text-2xl border-black`}>
+                {item.id}
                 </Text>
-
-                <Text style={tw`text-lg pt-2 px-2`}>
-                TBD
-                </Text>
+                <View style={tw`flex-row`}>
+                    <Text style={tw`text-base pt-2 px-2`}>
+                        {item.scheduled_at}
+                    </Text>
+                    <Icon name="chevron-right" type="fontawesome" size={35}/> 
+                </View>
             </View>
             
             <View style={tw`flex-row border-b border-blue-100`}>
@@ -54,7 +74,7 @@ const data = [
                         uri:'https://iili.io/H9qbSdg.png'
                     }}
                     />
-                    <Text style={tw`text-teal-700 text-sm pt-2`}>{item.origin}</Text>
+                    <Text style={tw` text-sm pt-2`}>{item.origin}</Text>
             </View>
                 <View style={tw`flex-row`}>
                     <Image
@@ -67,15 +87,18 @@ const data = [
                         uri:'https://iili.io/H9qmCpj.png'
                     }}
                     />
-                    <Text style={tw`text-teal-700 text-sm pt-2`}>{item.destination}</Text>
+                    <Text style={tw` text-sm pt-2`}>{item.destination}</Text>
+                    
                 </View>
-
-            </View>
+                
+                {/*  */}
+            </TouchableOpacity>
         
 
         )}
         />
     </View>
+    
   )
 }
 

@@ -1,5 +1,5 @@
 import {Dimensions, StyleSheet, Text, View } from 'react-native'
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import MapView, { Marker } from 'react-native-maps';
 var axios = require('axios');
 import tw from "twrnc";
@@ -13,8 +13,9 @@ const Map =  () => {
     const origin = useSelector(selectOrigin);
     const dispatch = useDispatch();
     const {height, width} = Dimensions.get('window');
-    const halfHeight = height / 2;
-  
+    const halfHeight = height / 1.4;
+    const [lat,setLat] = useState(0.02)
+    const [long,setLong] = useState(0.02)
 
     const mapRef = useRef(null);
     useEffect(
@@ -30,10 +31,13 @@ const Map =  () => {
     useEffect(()=>{
       if (!origin || !destination) return;
       const getTravelTime= async()=>{
+        
         fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?origins=${origin.description}&destinations=${destination.description}&units=imperial&key=${GOOGLE_MAPS_APIKEY}`)
         .then((res)=> res.json())
         .then((res)=>{
           console.log(res)
+          setLong(0.2);
+          setLat(0.2);
           dispatch(setTravelTimeInformation(res.rows[0].elements[0]));
         })
         .catch(function(err) {
@@ -52,14 +56,14 @@ const Map =  () => {
       ref= {mapRef}
       style={{
           width,
-          height:halfHeight
+          height:halfHeight,
       }}
       mapType="mutedStandard"
-      initialRegion={{
+      region={{
         latitude: origin.location.lat,
         longitude: origin.location.lng,
-        latitudeDelta: 0.05,
-        longitudeDelta: 0.05,
+        latitudeDelta: lat,
+        longitudeDelta: long,
       }}
       >
         {origin && destination &&(
@@ -68,7 +72,7 @@ const Map =  () => {
             destination={destination.description}
             apikey= {GOOGLE_MAPS_APIKEY}
             strokeWidth={3}
-            strokeColor="black"
+            strokeColor="blue"
           />
         )}
           {origin?.location && (

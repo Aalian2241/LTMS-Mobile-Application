@@ -1,76 +1,60 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { FlatList, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { KeyboardAwareFlatList } from 'react-native-keyboard-aware-scroll-view'
 import tw from 'twrnc';
-import { Image } from 'react-native-elements';
+import { Image,Icon } from 'react-native-elements';
+import { TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 
 const RideHistory = () => {
+    const navigation = useNavigation();
 const data = [
         {
-          id:"1",
-          time: "15th Nov, 4:18PM",
-          amount: "USD 23",
+          id:"LHASDIEAP1028",
+          date: "15 Nov, 4:18PM",
+          status: "Delivered",
           origin: "Lahore, Punjab, Pakistan",
-          destination: "Karachi, Sindh, Pakistan"
+          destination: "Karachi, Sindh, Pakistan",
+          completed_at: "16 Nov, 4:00PM",
         }, 
         {
-          id:"2",
-          time: "11th Nov, 9:18PM",
-          amount: "USD 35",
+          id:"LHTIEO102912",
+          date: "11 Nov, 9:18PM",
+          status: "Cancelled",
           origin: "Peshawar, KPK, Pakistan",
-          destination: "Lahore, Punjab, Pakistan"
+          destination: "Lahore, Punjab, Pakistan",
+          completed_at: "20 Nov, 4:00PM",
         }
       ]
 
   return (
-    <View style={tw`flex-row justify-between justify-items-center`}>
-        <KeyboardAwareFlatList
+    <View style={tw`flex-row justify-between`}>
+        <FlatList
         keyExtractor={(item)=>item.id}
         
         data = {data}
         renderItem={({item})=>(
         
-        <View style={tw`flex border-green-700 border-b`}>
+        <TouchableOpacity 
+        onPress={()=>navigation.navigate("CompletedRides",item)}
+        style={tw`flex border-green-700 border-b`}>
+
             <View style={tw`flex-row justify-between pb-4`}>
                 
                 <Text style={tw`text-left pt-2 px-2 font-semibold text-xl border-black`}>
-                {item.time}
+                {item.date}
                 </Text>
-
-                <Text style={tw`text-xl pt-2 px-2`}>
-                    {item.amount}
-                </Text>
-            </View>
-            
-            <View style={tw`flex-row border-b border-blue-100`}>
-                    <Image
-                    style={{
-                        width:40,
-                        height:40,
-                        resizeMode:"contain"
-                    }}
-                    source={{
-                        uri:'https://iili.io/H9qbSdg.png'
-                    }}
-                    />
-                    <Text style={tw`text-teal-700 text-sm pt-2`}>{item.origin}</Text>
-            </View>
                 <View style={tw`flex-row`}>
-                    <Image
-                    style={{
-                        width:40,
-                        height:35,
-                        resizeMode:"contain"
-                    }}
-                    source={{
-                        uri:'https://iili.io/H9qmCpj.png'
-                    }}
-                    />
-                    <Text style={tw`text-teal-700 text-sm pt-2`}>{item.destination}</Text>
+                    <Text style={tw`text-xl pt-2 px-2`}>
+                        {item.status}
+                    </Text>
+                    <Icon name="chevron-right" type="fontawesome" size={35}/> 
                 </View>
-
+                
             </View>
+            <Text style={tw`text-3xl text-green-600 font-bold`}>{item.id}</Text>
+        </TouchableOpacity>
         
 
         )}

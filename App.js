@@ -16,13 +16,28 @@ import Signup from './screens/Signup/Signup';
 import ForgotPasswrord from './screens/ForgotPassword.js/ForgotPasswrord';
 import RidesInfo from './screens/RidesInfo/RidesInfo';
 import { Button } from 'react-native-elements';
+import { auth } from './firebase';
+import { useEffect, useState } from 'react';
+import confirmTrip from './components/ScheduledRides/confirmTrip';
+import completedRides from './components/completedRides/completedRides';
 // flex box is in column for react native
 
 // STEPS:
 // 1) setup redux
 // 2) 
 export default function App() {
+  
   const Stack = createStackNavigator();
+  const [login, setLogin] = useState(null);
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user=>{
+      if (user){
+        setLogin(user)
+      }
+      
+    })
+    return unsubscribe
+  }, [])
   return (
     <Provider store={store}>
       <NavigationContainer>
@@ -35,51 +50,82 @@ export default function App() {
 
         
           <Stack.Navigator>
-            <Stack.Screen          
-            name="LoginScreen" 
-            component={LoginScreen}
-            options={{
-              headerShown:false,
-            }}/>
-            <Stack.Screen          
-            name="Signup" 
-            component={Signup}
-            options={{
-              headerShown:false,
-            }}/>
-            <Stack.Screen          
-            name="ForgotPassword" 
-            component={ForgotPasswrord}
-            options={{
-              headerShown:false,
-            }}/>
-            <Stack.Screen          
-            name="HomeScreen" 
-            component={HomeScreen}
-            options={{
-              headerShown:false,
-            }}/>
-            <Stack.Screen 
-            name="MapScreen" 
-            component={MapScreen}
-            options={{
-              headerShown:false,
-              gestureEnabled:true,
-            }}/>
-            <Stack.Screen 
-            name="RidesInfo" 
-            component={RidesInfo}
-            options={{
-              headerStyle: {
-                backgroundColor: 'green'
-              },
-              headerShown:true,
-              headerTitle:"Rides Info",
+            {login? (
+              <Stack.Group>
+                  <Stack.Screen          
+                  name="HomeScreen" 
+                  component={HomeScreen}
+                  options={{
+                    headerShown:false,
+                  }}/>
+                  <Stack.Screen 
+                  name="MapScreen" 
+                  component={MapScreen}
+                  options={{
+                    headerShown:false,
+                    gestureEnabled:true,
+                  }}/>
+                  <Stack.Screen 
+                  name="RidesInfo" 
+                  component={RidesInfo}
+                  options={{
+                    headerStyle: {
+                      backgroundColor: 'green'
+                    },
+                    headerShown:true,
+                    headerTitle:"Rides Info",
+                  
+                    
+                  }}/>
+                  <Stack.Screen 
+                  name="CompletedRides" 
+                  component={completedRides}
+                  options={{
+                    headerStyle: {
+                      backgroundColor: 'green'
+                    },
+                    headerShown:true,
+                    headerTitle:"Completed",
+                  }}/>
+                  <Stack.Screen 
+                  name="ConfirmTrip" 
+                  component={confirmTrip}
+                  options={{
+                    headerStyle: {
+                      backgroundColor: 'green'
+                    },
+                    headerShown:true,
+                    headerTitle:"Completed",
+                  }}/>
+              </Stack.Group>
+
+            ):(
+              <Stack.Group>
+                <Stack.Screen          
+                  name="LoginScreen" 
+                  component={LoginScreen}
+                  options={{
+                    headerShown:false,
+                  }}/>
+                  <Stack.Screen          
+                  name="Signup" 
+                  component={Signup}
+                  options={{
+                    headerShown:false,
+                  }}/>
+                  <Stack.Screen          
+                  name="ForgotPassword" 
+                  component={ForgotPasswrord}
+                  options={{
+                    headerShown:false,
+                  }}/>
+              </Stack.Group>
+
+            )}
             
-              
-            }}/>
             
-          </Stack.Navigator> 
+            
+            </Stack.Navigator>
          {/* <HomeScreen/> */}
          </KeyboardAvoidingView>
       
