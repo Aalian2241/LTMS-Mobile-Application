@@ -4,26 +4,28 @@ import MapView, { Marker } from 'react-native-maps';
 var axios = require('axios');
 import tw from "twrnc";
 import { useDispatch, useSelector } from 'react-redux';
-import { selectDestination, selectOrigin, setTravelTimeInformation } from '../../slices/navSlice';
+import { selectDescription, selectDestination, selectLocation, selectOrigin, setTravelTimeInformation } from '../../slices/navSlice';
 import MapViewDirections from "react-native-maps-directions";
 import {GOOGLE_MAPS_APIKEY} from "@env";
 
 const Map =  () => {
-    const destination = useSelector(selectDestination)
+    const location = useSelector(selectLocation);
+    const description = useSelector(selectDescription);
+    const destination = {location,description};
     const origin = useSelector(selectOrigin);
     const dispatch = useDispatch();
     const {height, width} = Dimensions.get('window');
-    const halfHeight = height / 1.4;
+    const halfHeight = height;
     const [lat,setLat] = useState(0.02)
     const [long,setLong] = useState(0.02)
-
+ 
     const mapRef = useRef(null);
     useEffect(
       ()=>{
         if (!origin || !destination) return;
         // zoom and fit to markers
         mapRef.current.fitToSuppliedMarkers(["origin","destination"],{
-            edgePadding: { top:50, right:50, bottom:50, left:50}, 
+            edgePadding: { top:50, right:100, bottom:100, left:50}, 
         });
 
       }, [origin,destination]);
@@ -35,8 +37,8 @@ const Map =  () => {
         fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?origins=${origin.description}&destinations=${destination.description}&units=imperial&key=${GOOGLE_MAPS_APIKEY}`)
         .then((res)=> res.json())
         .then((res)=>{
-          console.log(res)
           setLong(0.2);
+          // console.log("res: "+res)
           setLat(0.2);
           dispatch(setTravelTimeInformation(res.rows[0].elements[0]));
         })

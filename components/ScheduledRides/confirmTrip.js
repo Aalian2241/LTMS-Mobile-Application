@@ -3,12 +3,12 @@ import React from 'react'
 import { Button, Image } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native';
 import tw from "twrnc";
-import { selectOrigin,selectDestination, selectProgress, setJobNo, setJobStatus, setDestination, setOrigin, setProgress, setStartDate, setLoadType, setTransporter, } from '../../slices/navSlice';
+import { selectOrigin,selectDestination, selectProgress, setJobNo, setJobStatus, setDestination, setOrigin, setProgress, setStartDate, setTransporter, } from '../../slices/navSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 
 const completedRides = ({route,navigation}) => {
-    const { origin, destination,id,date,status,scheduled_at, load_type } = route.params;
+    const { origin, destination,id,date,status,scheduled_at } = route.params;
     const dispatch = useDispatch();
     const progress = useSelector(selectProgress)
     console.log(origin)
@@ -61,7 +61,7 @@ const completedRides = ({route,navigation}) => {
             </View>
             <View style={tw`flex-row justify-between`}>
                 <Text style={text1}>Load Type </Text>
-                <Text style={text2}>{load_type}</Text>
+                <Text style={text2}>Heavy</Text>
             </View>
             
         </View>
@@ -76,15 +76,16 @@ const completedRides = ({route,navigation}) => {
                   dispatch(setProgress(true))
                   dispatch(setStartDate(scheduled_at))
                   dispatch(setTransporter("TCS"))
-                  dispatch(setLoadType(load_type))
+                //   dispatch(setDestination(destination))
                   dispatch(setJobNo(id))
                   dispatch(setJobStatus("Picked-Up"))
-                  navigation.navigate("MapScreen")
+                  navigation.navigate("In-Progress")
+                  
               }
           }}
           title="START TRIP"
           color="#f194ff"
-
+          accessibilityLabel="Learn more about this purple button"
       />
         </View>
         

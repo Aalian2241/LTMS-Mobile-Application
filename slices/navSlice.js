@@ -12,6 +12,8 @@ const initialState = {
     start_date:null,
     end_date:null,
     transporter:null,
+    location:null,
+    description:null,
     
 
 }
@@ -22,6 +24,12 @@ export const navSlice = createSlice({
   reducers: {
     setOrigin: (state, action)=> {
       state.origin= action.payload;
+    },
+    setDescription: (state, action)=> {
+      state.description= action.payload;
+    },
+    setLocation: (state, action)=> {
+      state.location= action.payload;
     },
     setDestination: (state, action)=> {
         state.destination= action.payload;
@@ -58,10 +66,12 @@ export const navSlice = createSlice({
 });
 
 // sending the data layer
-export const { setOrigin, setDestination,setLoadType,setTransporter, setTravelTimeInformation,setStartDate,setProgress, setJobStatus, setJobNo,setEndDate } = navSlice.actions
+export const { setOrigin,setLocation, setDescription, setDestination,setLoadType,setTransporter, setTravelTimeInformation,setStartDate,setProgress, setJobStatus, setJobNo,setEndDate } = navSlice.actions
   
 // grabbing the data layer: SELECTORS
 export const selectOrigin = (state) =>state.nav.origin
+export const selectLocation = (state) =>state.nav.location
+export const selectDescription = (state) =>state.nav.description
 export const selectDestination = (state) =>state.nav.destination
 export const selectTravelTimeInformation = (state) =>state.nav.travelTimeInformation
 export const selectJobNo = (state) =>state.nav.jobNo

@@ -19,7 +19,7 @@ import { Button } from 'react-native-elements';
 import { auth } from './firebase';
 import { useEffect, useState } from 'react';
 import confirmTrip from './components/ScheduledRides/confirmTrip';
-import completedRides from './components/completedRides/completedRides';
+import CompletedRides from './components/completedRides/CompletedRides';
 // flex box is in column for react native
 
 // STEPS:
@@ -41,14 +41,11 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        
         <KeyboardAvoidingView
               behavior={Platform.OS === "ios" ? "padding" : "height"}
               style={{ flex: 1 }}
               keyboardVerticalOffset={Platform.OS === "ios" ? -64 :-50}
-            >
-
-        
+            >  
           <Stack.Navigator>
             {login? (
               <Stack.Group>
@@ -62,8 +59,12 @@ export default function App() {
                   name="MapScreen" 
                   component={MapScreen}
                   options={{
-                    headerShown:false,
-                    gestureEnabled:true,
+                    headerStyle: {
+                      backgroundColor: 'green',
+                    },
+                    headerTitle:"ACTIVE TRIP",
+                    headerShown:true,
+                    gestureEnabled:false,
                   }}/>
                   <Stack.Screen 
                   name="RidesInfo" 
@@ -74,12 +75,11 @@ export default function App() {
                     },
                     headerShown:true,
                     headerTitle:"Rides Info",
-                  
                     
                   }}/>
                   <Stack.Screen 
                   name="CompletedRides" 
-                  component={completedRides}
+                  component={CompletedRides}
                   options={{
                     headerStyle: {
                       backgroundColor: 'green'

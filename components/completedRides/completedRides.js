@@ -6,9 +6,8 @@ import tw from "twrnc";
 import { selectOrigin,selectDestination, } from '../../slices/navSlice';
 
 
-const completedRides = ({route,navigation}) => {
+const CompletedRides = ({route,navigation}) => {
     const { origin, destination,id,date,status,completed_at } = route.params;
-    console.log(origin)
     return (
         <View  style={tw`flex  border-blue-100 `}>
             <View style={tw`bg-green-100`}> 
@@ -71,6 +70,6 @@ const completedRides = ({route,navigation}) => {
 }
 const text1 = tw`text-green-700 text-xl pt-2`
 const text2 = tw`text-black text-xl pt-2`
-export default completedRides
+export default CompletedRides
 
 const styles = StyleSheet.create({})

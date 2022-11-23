@@ -3,7 +3,7 @@ import React, {useState} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import tw from "twrnc";
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
-import { setDestination } from '../../slices/navSlice';
+import { setDescription, setDestination, setLocation } from '../../slices/navSlice';
 import {GOOGLE_MAPS_APIKEY} from "@env";
 import { useDispatch } from 'react-redux';
 import { Button, Icon } from 'react-native-elements';
@@ -24,12 +24,10 @@ const NavigateCard = () => {
                 <GooglePlacesAutocomplete 
                     styles={TextBoxstyle}
                     onPress={(data,details=null)=>{
-                        dispatch(
-                        setDestination({
-                        location: details.geometry.location,
-                        description: data.description,
-                                      })
-                                );
+                        console.log("data: "+data.description)
+                        console.log("details: "+ details.geometry.location)
+                        dispatch(setLocation(details.geometry.location));
+                        dispatch(setDescription(data.description));
                        
                         navigation.navigate("RideOptionsCard")
                     }}

@@ -11,7 +11,7 @@ const RideHistory = () => {
     const navigation = useNavigation();
 const data = [
         {
-          id:"LHASDIEAP1028",
+          id:"1501/LFINT/22/28",
           date: "15 Nov, 4:18PM",
           status: "Delivered",
           origin: "Lahore, Punjab, Pakistan",
@@ -19,7 +19,7 @@ const data = [
           completed_at: "16 Nov, 4:00PM",
         }, 
         {
-          id:"LHTIEO102912",
+          id:"1501/LCTSA/22/50",
           date: "11 Nov, 9:18PM",
           status: "Cancelled",
           origin: "Peshawar, KPK, Pakistan",

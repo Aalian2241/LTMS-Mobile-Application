@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { selectProgress } from '../../slices/navSlice';
 
 
-const progressComp = () => {
+const ProgressComp = () => {
   const progress = useSelector(selectProgress)
   if (progress)
     {
@@ -14,11 +14,11 @@ const progressComp = () => {
     else
     {
       return (
-        <Text>asdsd</Text>
+        <Text>START A TRIP FIRST</Text>
       );
     }
 }
 
-export default progressComp
+export default ProgressComp
 
 const styles = StyleSheet.create({})

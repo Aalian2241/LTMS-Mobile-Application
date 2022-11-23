@@ -75,7 +75,7 @@ const LoginScreen = () => {
         </View>
         <View>
         <TouchableOpacity style={tw`px-1  `}> 
-              <Text style={tw`text-right text-blue-500 underline underline-offset-4`}>Forgot your password?</Text>
+              <Text style={tw`text-right text-blue-500 underline`}>Forgot your password?</Text>
         </TouchableOpacity>
 
         <TouchableOpacity 
@@ -85,8 +85,7 @@ const LoginScreen = () => {
             Login
           </Text>
         </TouchableOpacity>
-        
-        <TouchableOpacity ><Text style={tw`text-green-700 text-center font-bold text-lg underline-offset-1` }> Dont have an account? Sign Up</Text></TouchableOpacity>
+ 
 
         </View>
         

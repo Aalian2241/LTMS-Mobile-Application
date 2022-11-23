@@ -18,7 +18,6 @@ const RideHistory = () => {
     const start_date = useSelector(selectStartDate);
     const job_status = useSelector(selectJobStatus);
     const progress = useSelector(selectProgress);
-    console.log("Job Status: "+job_status)
     const jobId = useSelector(selectJobNo);
     const load_type = useSelector(selectLoadType)
     const updateStatus = ["Picked-Up", "In-Transit", "Delivered", "Cancelled"]
@@ -83,7 +82,7 @@ const RideHistory = () => {
             
             <View style={tw`justify-between flex-row mt-2 border-b border-zinc-300 `}>
                 <Text style={text1}>UPDATE STATUS</Text>
-                <View style={tw``}>
+                <View >
                     <SelectDropdown
                         disabled={!progress}
                         buttonStyle={tw`bg-green-700  h-10 w-30`}

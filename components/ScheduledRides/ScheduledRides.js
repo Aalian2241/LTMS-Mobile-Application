@@ -1,6 +1,5 @@
-import { ActivityIndicator, FlatList, StyleSheet, Text, View } from 'react-native'
+import { FlatList, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
-import { KeyboardAwareFlatList } from 'react-native-keyboard-aware-scroll-view'
 import tw from 'twrnc';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Icon, Image } from 'react-native-elements';
@@ -18,11 +17,10 @@ const RideHistory = () => {
     const destination = useSelector(selectDestination)
     const navigation = useNavigation();
     const dispatch = useDispatch();
-    console.log(progress);
 
     const data = [
         {
-          id:"LHASDIEAP1028",
+          id:"1501/LFINT/22/27",
           scheduled_at: "20 November, 2022",
           origin: "Lahore, Pakistan",
           destination: "Karachi, Sindh, Pakistan",
@@ -30,7 +28,7 @@ const RideHistory = () => {
           load_type:"Heavy",
         }, 
         {
-          id:"LHPSADOPQ1028",
+          id:"1501/LCB/22/50",
           scheduled_at: "29 November, 2022",
           origin: "Peshawar,Pakistan",
           destination: "Lahore, Punjab, Pakistan",
