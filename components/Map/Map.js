@@ -9,9 +9,7 @@ import MapViewDirections from "react-native-maps-directions";
 import {GOOGLE_MAPS_APIKEY} from "@env";
 
 const Map =  () => {
-    const location = useSelector(selectLocation);
-    const description = useSelector(selectDescription);
-    const destination = {location,description};
+    const destination = useSelector(selectDestination)
     const origin = useSelector(selectOrigin);
     const dispatch = useDispatch();
     const {height, width} = Dimensions.get('window');
@@ -25,7 +23,7 @@ const Map =  () => {
         if (!origin || !destination) return;
         // zoom and fit to markers
         mapRef.current.fitToSuppliedMarkers(["origin","destination"],{
-            edgePadding: { top:50, right:100, bottom:100, left:50}, 
+            edgePadding: { top:50, right:50, bottom:500, left:50}, 
         });
 
       }, [origin,destination]);

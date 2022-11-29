@@ -2,12 +2,13 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import RideHistory from './inProgress';
 import { useSelector } from 'react-redux';
-import { selectProgress } from '../../slices/navSlice';
+import { selectDestination, selectProgress } from '../../slices/navSlice';
 
 
 const ProgressComp = () => {
   const progress = useSelector(selectProgress)
-  if (progress)
+  const destination = useSelector(selectDestination)
+  if (progress && destination)
     {
       return ( <RideHistory/> );
     }

@@ -6,20 +6,22 @@ import { Button, Icon, Image } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import NavigateCard from '../NavigateCard/NavigateCard';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectJobNo, selectJobStatus, selectLoadType, selectOrigin, selectProgress, selectStartDate, setJobStatus } from '../../slices/navSlice';
+import { selectDestination, selectJobNo, selectJobStatus, selectLoadType, selectOrigin, selectProgress, selectStartDate, setJobStatus } from '../../slices/navSlice';
 import SelectDropdown from 'react-native-select-dropdown'
 
 
 const RideHistory = () => {
     const dispatch = useDispatch();
     const navigation = useNavigation();
-    const {description}= useSelector(selectOrigin);
 
+    const origin= useSelector(selectOrigin);
+    const destination = useSelector(selectDestination);
     const start_date = useSelector(selectStartDate);
     const job_status = useSelector(selectJobStatus);
     const progress = useSelector(selectProgress);
     const jobId = useSelector(selectJobNo);
     const load_type = useSelector(selectLoadType)
+
     const updateStatus = ["Picked-Up", "In-Transit", "Delivered", "Cancelled"]
 
   return (
@@ -47,7 +49,7 @@ const RideHistory = () => {
                         uri:'https://iili.io/H9qbSdg.png'
                     }}
                     />
-                    <Text style={tw`text-teal-700 text-lg w-100 pt-2`}>{description}</Text>
+                    <Text style={tw`text-teal-700 text-lg w-100 pt-2`}>{origin.description}</Text>
             </View>
                 <View style={tw`flex-row border-b `}>
                     <Image
@@ -62,7 +64,7 @@ const RideHistory = () => {
                         uri:'https://iili.io/H9qmCpj.png'
                     }}
                     />
-                    <Text style={tw`text-teal-700 text-lg w-100 pt-4`}>destination</Text>
+                    <Text style={tw`text-teal-700 text-lg text-left  w-90 pt-4`}>{destination.description}</Text>
             </View>
                 
 

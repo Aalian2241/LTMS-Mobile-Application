@@ -4,13 +4,49 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import tw from "twrnc";
 import Map from '../../components/Map/Map';
 import { createStackNavigator } from '@react-navigation/stack';
-import NavigateCard from '../../components/NavigateCard/NavigateCard';
-import RideOptionsCard from '../../components/RideOptionsCard/RideOptionsCard';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectDestination, selectJobStatus, setJobNo, setJobStatus, setProgress } from '../../slices/navSlice';
+import { Button, Icon } from 'react-native-elements';
+import { useNavigation } from '@react-navigation/native';
+import { Alert } from 'react-native';
+
+
+
 const MapScreen = ({route,navigation}) => {
+  const dispatch = useDispatch();
   const {jobId} = route.params;
+  const destination = useSelector(selectDestination)
+  const job_status = useSelector(selectJobStatus);
   const Stack = createStackNavigator();
+
+  const showConfirmDialog = () => {
+    return Alert.alert(
+      "END TRIP?",
+      "Are you sure you want to end this trip?",
+      [
+        // The "Yes" button
+        
+        // The "No" button
+        // Does nothing but dismiss the dialog when tapped
+        {
+          text: "No",
+        },
+        {
+          text: "Yes",
+          onPress: () => {
+            dispatch(setProgress(false))
+            dispatch(setJobStatus(null))
+            dispatch(setJobNo(null))
+            navigation.navigate("HomeScreen")
+          },
+        },
+      ]
+    );
+  };
+
   return (
-    <View>
+    <View style={tw`flex-grow`}>
        <View style={tw`h-100 absolute`}>
          <Map/>
        </View>
@@ -19,15 +55,47 @@ const MapScreen = ({route,navigation}) => {
           <View style={tw`flex-1 border-r border-gray-500 m-2`}>
             <Text style={header}>JOB NO.</Text>
             <Text style={underHeader}>{jobId}</Text>
+            <Text style={tw ` text-white  font-extrabold text-lg `}>(IN-TRANSIT)</Text>
           </View>
-          <View style={tw` flex-2 w-50 border-r m-2 pb-2`}>
+          <View style={tw` flex-2 w-50 m-2 pb-2`}>
             <Text style={header} >DESTINATION</Text>
-            <Text style={underHeader}>Peshawar, KPK, Pakistan</Text>
+            <Text style={underHeader}>{destination.description}</Text>
           </View>
+       </View>
+      
+       <View style={tw`mt-auto items-center flex-row justify-center `}>
+       <Button
+              buttonStyle={tw`w-80 bg-red-800 rounded-xl`}
+              containerStyle={tw`m-2`}
+              disabled={false}
+              disabledStyle={tw`bg-gray-400`}
+              disabledTitleStyle={tw`text-black`}
+              linearGradientProps={null}
+              
+              loadingProps={{ animating: true }}
+              loadingStyle={{}}
+              onPress={()=>showConfirmDialog()}
+              title="END TRIP"
+              titleProps={{}}
+              titleStyle={tw`text-4xl `}
+            />
+
+        <Button
+        
+        buttonStyle={tw`bg-green-700 w-14`}
+          icon={
+            <Icon
+              name="cloud-upload-outline"
+              size={30}
+              color="white"
+              type="ionicon"
+            />
+          }
+        />
        </View>
        
     </View>
-        
+ 
         /* ====================================== */
 
         /* <View style={tw`h-1/2 pt-2`}>

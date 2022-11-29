@@ -1,6 +1,40 @@
 import { createSlice, miniSerializeError } from '@reduxjs/toolkit'
-
+const data = [
+  {
+    id:"1501/LFINT/22/27",
+    scheduled_at: "20 November, 2022",
+    origin: "A ONE LOGISTICS, Mina Jabel Ali, Dubai",
+    destination: "A ONE LOGISTICS, Industrial Area 5,Industrial area,Sharjah",
+    transporter: "GENTLE TRANSPORTERS",
+    status:"assigned",
+    load_type:"Heavy",
+  }, 
+  {
+    id:"1501/LCB/22/50", 
+    scheduled_at: "29 November, 2022",
+    origin: "Peshawar,Pakistan",
+    destination: "Lahore, Punjab, Pakistan",
+    status:"assigned",
+  },
+  {
+    id:"1501/LFINT/22/28",
+    date: "15 Nov, 4:18PM",
+    status: "Delivered",
+    origin: "Lahore, Punjab, Pakistan",
+    destination: "Karachi, Sindh, Pakistan",
+    completed_at: "16 Nov, 4:00PM",
+  }, 
+  {
+    id:"1501/LCTSA/22/50",
+    date: "11 Nov, 9:18PM",
+    status: "Cancelled",
+    origin: "Peshawar, KPK, Pakistan",
+    destination: "Lahore, Punjab, Pakistan",
+    completed_at: "20 Nov, 4:00PM",
+  }
+]
 const initialState = { 
+    allJobs:data,
     jobNo:null,
     origin:null,
     destination:null,
@@ -69,6 +103,7 @@ export const navSlice = createSlice({
 export const { setOrigin,setLocation, setDescription, setDestination,setLoadType,setTransporter, setTravelTimeInformation,setStartDate,setProgress, setJobStatus, setJobNo,setEndDate } = navSlice.actions
   
 // grabbing the data layer: SELECTORS
+export const selectAllJobs = (state) =>state.nav.allJobs
 export const selectOrigin = (state) =>state.nav.origin
 export const selectLocation = (state) =>state.nav.location
 export const selectDescription = (state) =>state.nav.description

@@ -14,7 +14,6 @@ import scheduledTrips from './scheduledTrips.js';
 
 const RideHistory = () => {
     const progress = useSelector(selectProgress)
-    const destination = useSelector(selectDestination)
     const navigation = useNavigation();
     const dispatch = useDispatch();
 
@@ -22,13 +21,14 @@ const RideHistory = () => {
         {
           id:"1501/LFINT/22/27",
           scheduled_at: "20 November, 2022",
-          origin: "Lahore, Pakistan",
-          destination: "Karachi, Sindh, Pakistan",
+          origin: "A ONE LOGISTICS, Mina Jabel Ali, Dubai",
+          destination: "A ONE LOGISTICS, Industrial Area 5,Industrial area,Sharjah",
+          transporter: "GENTLE TRANSPORTERS",
           status:"assigned",
           load_type:"Heavy",
         }, 
         {
-          id:"1501/LCB/22/50",
+          id:"1501/LCB/22/50", 
           scheduled_at: "29 November, 2022",
           origin: "Peshawar,Pakistan",
           destination: "Lahore, Punjab, Pakistan",

@@ -24,6 +24,8 @@ const data = [
 
 const NavOptions = ({props}) => {
     const jobId= useSelector(selectJobNo);
+    console.log(jobId)
+
     const origin = useSelector(selectOrigin);
     const navigation = useNavigation();
     const destination = useSelector(selectDestination);
@@ -42,17 +44,17 @@ const NavOptions = ({props}) => {
         <View>
             <View style={tw`flex-row justify-between w-full mb-2 border-b border-slate-400`}>
                 <Text style={text1}>Job No.</Text>
-                <Text style={tw`text-white w-27 text-lg m-1`}>{jobId}</Text>
+                <Text style={tw`text-white w-20 text-lg m-1`}>{jobId}</Text>
             </View>
             <View style={tw`flex-row justify-between w-45 mb-5 border-b border-slate-400`}>
-                <Text style={tw`text-white  text-xl font-bold mt-1`}>TO</Text>
-                <Text style={tw`text-white w-26 text-lg m-1`}>{destination}</Text>
+                <Text style={tw`text-white  text-2xl font-bold mt-1`}>TO</Text>
+                <Text style={tw`text-white w-26 text-lg m-1`}>{ destination?.description}</Text>
             </View>
             <View style={tw`flex-row justify-between w-full mb-3 border-b border-slate-400`}>
                 <Text style={text1}>Status</Text>
                 <Text style={text2}>{job_status}</Text>
             </View>
-            <Text style={tw`mt-2 text-white  font-extrabold text-2xl`}>ACTIVE TRIP</Text>
+            <Text style={tw`mt-2 text-white  font-extrabold text-xl`}>ACTIVE TRIP</Text>
                 <Icon 
                     style={tw`rounded-2xl  w-9 mt-2 bg-white p-1`}
                     color="green" name='arrowright' type='antdesign'/>
@@ -95,5 +97,5 @@ const NavOptions = ({props}) => {
 }
 
 export default NavOptions
-const text1= tw`text-white text-xl font-bold `;
-const text2= tw`text-white  text-lg `
+const text1= tw`text-white text-2xl font-bold `;
+const text2= tw`text-white  text-lg w-20 `

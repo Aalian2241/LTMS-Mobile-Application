@@ -24,8 +24,6 @@ const NavigateCard = () => {
                 <GooglePlacesAutocomplete 
                     styles={TextBoxstyle}
                     onPress={(data,details=null)=>{
-                        console.log("data: "+data.description)
-                        console.log("details: "+ details.geometry.location)
                         dispatch(setLocation(details.geometry.location));
                         dispatch(setDescription(data.description));
                        

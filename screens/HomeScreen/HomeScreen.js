@@ -6,17 +6,19 @@ import React, {useState} from 'react'
 import {GOOGLE_MAPS_APIKEY} from "@env";
 import NavOptions from '../../components/NavOptions/NavOptions';
 var logo = require ("../../assets/cab_logo.png");
-import {useDispatch} from "react-redux";
-import {setDestination, setOrigin} from "../../slices/navSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {selectAllJobs, setDestination, setOrigin} from "../../slices/navSlice";
 import NavFavourites from '../../components/NavFavourites.js/NavFavourites';
 
 
 const HomeScreen = () => {
+  const allJobs=useSelector(selectAllJobs);
+  console.log(allJobs.length) 
   const [touchable, setTouchable] = useState(false);
   const dispatch = useDispatch();
   return (
     <SafeAreaView style={tw`bg-white h-full`}>
-      <View style={tw`p-4 border-b`}>
+      <View style={tw`p-4 `}>
         <Image
             style = {{
               width:120,
@@ -55,7 +57,7 @@ const HomeScreen = () => {
 
       <NavOptions props={touchable}/>
       </View>
-      <NavFavourites />
+      {/* <NavFavourites /> */}
     </SafeAreaView>
   )
 }

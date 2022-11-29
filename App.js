@@ -29,6 +29,7 @@ export default function App() {
   
   const Stack = createStackNavigator();
   const [login, setLogin] = useState(null);
+  
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user=>{
       if (user){
@@ -61,8 +62,10 @@ export default function App() {
                   options={{
                     headerStyle: {
                       backgroundColor: 'green',
+                      height:70
                     },
-                    headerTitle:"ACTIVE TRIP",
+                    headerTitle:`ACTIVE TRIP`,
+                    headerTitleStyle:{color:'white'},
                     headerShown:true,
                     gestureEnabled:false,
                   }}/>
