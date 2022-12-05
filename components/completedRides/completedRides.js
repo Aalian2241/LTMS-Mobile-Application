@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { Image } from 'react-native-elements'
+import { Icon, Image } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native';
 import tw from "twrnc";
 import { selectOrigin,selectDestination, } from '../../slices/navSlice';
@@ -12,28 +12,20 @@ const CompletedRides = ({route,navigation}) => {
         <View  style={tw`flex  border-blue-100 `}>
             <View style={tw`bg-green-100`}> 
                 <View style={tw`flex-row border-blue-100`}>
-                    <Image
-                    style={{
-                        width:40,
-                        height:40,
-                        resizeMode:"contain"
-                    }}
-                    source={{
-                        uri:'https://iili.io/H9qbSdg.png'
-                    }}
+                    <Icon
+                        name = "truck-outline"
+                        type="material-community"
+                        color="green"
+                        size={35}
                     />
                     <Text style={tw`text-teal-700 text-xl pt-2`}>{origin}</Text>
                 </View>
                 <View style={tw`flex-row`}>
-                    <Image
-                    style={{
-                        width:40,
-                        height:35,
-                        resizeMode:"contain"
-                    }}
-                    source={{
-                        uri:'https://iili.io/H9qmCpj.png'
-                    }}
+                    <Icon
+                        name = "location-outline"
+                        type="ionicon"
+                        color="green"
+                        size={35}
                     />
                     <Text style={tw`text-teal-700 text-xl pt-2`}>{destination}</Text>
                 </View>

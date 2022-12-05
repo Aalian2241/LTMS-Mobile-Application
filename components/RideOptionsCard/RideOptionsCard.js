@@ -40,7 +40,6 @@ const RideOptionsCard = () => {
   const SEARCH_CHARGE_RATE = 1.5
   const [selected,setSelected] = useState(null);
   const travelTimeInformation = useSelector(selectTravelTimeInformation);
-  console.log(travelTimeInformation)
   const navigation = useNavigation();
   return (
     <SafeAreaView style={tw`bg-white flex-1 `}>

@@ -1,9 +1,8 @@
-import { FlatList, Text, TouchableOpacity, View, Image } from 'react-native'
+import {Text, TouchableOpacity, View, Image } from 'react-native'
 import React, { useState } from 'react'
 import tw from 'twrnc';
 import { Button, Icon } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
-import { KeyboardAwareFlatList } from 'react-native-keyboard-aware-scroll-view';
 import { selectDestination, selectJobNo, selectJobStatus, selectOrigin, selectProgress } from '../../slices/navSlice';
 import { useSelector } from 'react-redux';
 
@@ -24,8 +23,6 @@ const data = [
 
 const NavOptions = ({props}) => {
     const jobId= useSelector(selectJobNo);
-    console.log(jobId)
-
     const origin = useSelector(selectOrigin);
     const navigation = useNavigation();
     const destination = useSelector(selectDestination);
@@ -38,7 +35,7 @@ const NavOptions = ({props}) => {
         disabled={!progress}
         onPress={()=> {
             navigation.navigate("MapScreen",{jobId}) }}    
-        style={tw` p-2 pl-3 pb-8 pt-3 bg-green-800 mr-4 w-50 `}
+        style={tw` p-2 pl-3 pb-8 pt-3 bg-green-800 ${!progress && "bg-white border-green-700 border-2 border-solid"} mr-4 w-50 `}
         >
         {progress?(
         <View>
@@ -62,8 +59,8 @@ const NavOptions = ({props}) => {
            
         ):(
             <View style={tw``}>
-                <Text style={tw`text-white font-extrabold text-2xl text-center mt-20 flex`}>NO ACTIVE TRIPS</Text>
-                <Text style={tw`text-center text-white text-base`}>Go to Activites to start a Trip</Text>
+                <Text style={tw`text-green-700  font-extrabold text-2xl text-center mt-20 flex`}>NO ACTIVE TRIPS</Text>
+                <Text style={tw`text-center text-green-700 text-base`}>Go to Activites to start a Trip</Text>
             </View>
             
         )}
@@ -75,7 +72,7 @@ const NavOptions = ({props}) => {
         style={tw` p-2 pl-3 pb-8 pt-3 bg-green-800 mr-4 w-40 `}
         >
             
-            <View>
+            <View style={tw`items-center`}>
                 <Image
                     style={{
                         width:100,
@@ -88,7 +85,7 @@ const NavOptions = ({props}) => {
                 />
                 <Text style={tw`mt-2 text-white  font-extrabold text-2xl`}>Activities</Text>
                 <Icon 
-                    style={tw`rounded-2xl w-9 mt-2 bg-white p-1`}
+                    style={tw`rounded-2xl w-35 mt-2 flex-shrink bg-white p-1`}
                     color="green" name='arrowright' type='antdesign'/>
             </View>
         </TouchableOpacity>

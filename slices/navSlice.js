@@ -16,22 +16,7 @@ const data = [
     destination: "Lahore, Punjab, Pakistan",
     status:"assigned",
   },
-  {
-    id:"1501/LFINT/22/28",
-    date: "15 Nov, 4:18PM",
-    status: "Delivered",
-    origin: "Lahore, Punjab, Pakistan",
-    destination: "Karachi, Sindh, Pakistan",
-    completed_at: "16 Nov, 4:00PM",
-  }, 
-  {
-    id:"1501/LCTSA/22/50",
-    date: "11 Nov, 9:18PM",
-    status: "Cancelled",
-    origin: "Peshawar, KPK, Pakistan",
-    destination: "Lahore, Punjab, Pakistan",
-    completed_at: "20 Nov, 4:00PM",
-  }
+
 ]
 const initialState = { 
     allJobs:data,
@@ -48,6 +33,8 @@ const initialState = {
     transporter:null,
     location:null,
     description:null,
+    invoiceURI:null,
+    invoiceSig:null,
     
 
 }
@@ -58,6 +45,12 @@ export const navSlice = createSlice({
   reducers: {
     setOrigin: (state, action)=> {
       state.origin= action.payload;
+    },
+    setInvoiceURI: (state, action)=> {
+      state.invoiceURI= action.payload;
+    },
+    setInvoiceSig: (state, action)=> {
+      state.invoiceSig= action.payload;
     },
     setDescription: (state, action)=> {
       state.description= action.payload;
@@ -100,9 +93,11 @@ export const navSlice = createSlice({
 });
 
 // sending the data layer
-export const { setOrigin,setLocation, setDescription, setDestination,setLoadType,setTransporter, setTravelTimeInformation,setStartDate,setProgress, setJobStatus, setJobNo,setEndDate } = navSlice.actions
+export const { setOrigin,setLocation, setDescription, setDestination,setLoadType,setTransporter,setInvoiceSig,setInvoiceURI ,setTravelTimeInformation,setStartDate,setProgress, setJobStatus, setJobNo,setEndDate } = navSlice.actions
   
 // grabbing the data layer: SELECTORS
+export const selectInvoiceURI = (state) =>state.nav.invoiceURI
+export const selectInvoiceSig = (state) =>state.nav.invoiceSig
 export const selectAllJobs = (state) =>state.nav.allJobs
 export const selectOrigin = (state) =>state.nav.origin
 export const selectLocation = (state) =>state.nav.location

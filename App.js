@@ -20,12 +20,22 @@ import { auth } from './firebase';
 import { useEffect, useState } from 'react';
 import confirmTrip from './components/ScheduledRides/confirmTrip';
 import CompletedRides from './components/completedRides/CompletedRides';
+import Signature_  from './screens/SignatureScreen/Signature_Screen';
+import { LogBox } from 'react-native';
+import ImageUploader from './components/ImageUploader/ImageUploader';
+ 
+// Ignore log notification by message
+
 // flex box is in column for react native
 
 // STEPS:
 // 1) setup redux
 // 2) 
 export default function App() {
+  LogBox.ignoreLogs(['Warning: ...']);
+ 
+//Ignore all log notifications
+  LogBox.ignoreAllLogs();
   
   const Stack = createStackNavigator();
   const [login, setLogin] = useState(null);
@@ -69,6 +79,35 @@ export default function App() {
                     headerShown:true,
                     gestureEnabled:false,
                   }}/>
+                  <Stack.Screen          
+                    name="UploadInvoice" 
+                    component={ImageUploader}
+                    options={{
+                      headerShown:false,
+                      headerStyle: {
+                        backgroundColor: 'green',
+                        height:70
+                      },
+                      headerTitle:`Upload Invoice`,
+                      headerTitleStyle:{color:'white'},
+                      headerShown:true,
+                      gestureEnabled:false,
+                    }}/>
+                    <Stack.Screen          
+                    name="SignatureScreen" 
+                    component={Signature_}
+                    options={{
+                  
+                      headerShown:true,
+                      headerStyle: {
+                        backgroundColor: 'green',
+                        height:70
+                      },
+                      headerTitle:`Signature`,
+                      headerTitleStyle:{color:'white'},
+                      headerShown:true,
+                      gestureEnabled:false,
+                    }}/>
                   <Stack.Screen 
                   name="RidesInfo" 
                   component={RidesInfo}

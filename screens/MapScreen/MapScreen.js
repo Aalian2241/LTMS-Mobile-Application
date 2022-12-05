@@ -6,7 +6,7 @@ import Map from '../../components/Map/Map';
 import { createStackNavigator } from '@react-navigation/stack';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectDestination, selectJobStatus, setJobNo, setJobStatus, setProgress } from '../../slices/navSlice';
+import { selectDestination, selectInvoiceSig, selectInvoiceURI, selectJobNo, selectJobStatus, setInvoiceSig, setInvoiceURI, setJobNo, setJobStatus, setProgress } from '../../slices/navSlice';
 import { Button, Icon } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import { Alert } from 'react-native';
@@ -14,8 +14,10 @@ import { Alert } from 'react-native';
 
 
 const MapScreen = ({route,navigation}) => {
+  const invoiceSig = useSelector(selectInvoiceSig)
+  const invoiceURI = useSelector(selectInvoiceURI)
   const dispatch = useDispatch();
-  const {jobId} = route.params;
+  const jobId = useSelector(selectJobNo);
   const destination = useSelector(selectDestination)
   const job_status = useSelector(selectJobStatus);
   const Stack = createStackNavigator();
@@ -38,6 +40,8 @@ const MapScreen = ({route,navigation}) => {
             dispatch(setProgress(false))
             dispatch(setJobStatus(null))
             dispatch(setJobNo(null))
+            dispatch(setInvoiceURI(null))
+            dispatch(setInvoiceSig(null))
             navigation.navigate("HomeScreen")
           },
         },
@@ -65,11 +69,11 @@ const MapScreen = ({route,navigation}) => {
       
        <View style={tw`mt-auto items-center flex-row justify-center `}>
        <Button
-              buttonStyle={tw`w-80 bg-red-800 rounded-xl`}
+              buttonStyle={tw`w-80 h-20 bg-red-800 rounded-xl`}
               containerStyle={tw`m-2`}
-              disabled={false}
+              disabled={!invoiceSig || !invoiceURI }
               disabledStyle={tw`bg-gray-400`}
-              disabledTitleStyle={tw`text-black`}
+              disabledTitleStyle={tw`text-white text-5xl`}
               linearGradientProps={null}
               
               loadingProps={{ animating: true }}
@@ -77,21 +81,35 @@ const MapScreen = ({route,navigation}) => {
               onPress={()=>showConfirmDialog()}
               title="END TRIP"
               titleProps={{}}
-              titleStyle={tw`text-4xl `}
+              titleStyle={tw`text-5xl `}
             />
-
-        <Button
+          <View style={tw``}>
+            <Button
+            onPress={()=>navigation.navigate("SignatureScreen", navigation)}
+            buttonStyle={tw`bg-green-700 w-10 mb-2`}
+              icon={
+                <Icon
+                  name="pencil-outline"
+                  size={24}
+                  color="white"
+                  type="ionicon"
+                />
+              }
+            />
+            <Button   
+            onPress={()=>navigation.navigate("UploadInvoice", navigation)}
+            buttonStyle={tw`bg-green-700 w-10`}
+              icon={
+                <Icon
+                  name="cloud-upload-outline"
+                  size={24}
+                  color="white"
+                  type="ionicon"
+                />
+              }
+            />
+          </View>
         
-        buttonStyle={tw`bg-green-700 w-14`}
-          icon={
-            <Icon
-              name="cloud-upload-outline"
-              size={30}
-              color="white"
-              type="ionicon"
-            />
-          }
-        />
        </View>
        
     </View>

@@ -1,10 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { KeyboardAwareFlatList } from 'react-native-keyboard-aware-scroll-view'
 import tw from 'twrnc';
-import { Button, Icon, Image } from 'react-native-elements';
+import { Button, Icon } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
-import NavigateCard from '../NavigateCard/NavigateCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectDestination, selectJobNo, selectJobStatus, selectLoadType, selectOrigin, selectProgress, selectStartDate, setJobStatus } from '../../slices/navSlice';
 import SelectDropdown from 'react-native-select-dropdown'
@@ -39,20 +36,23 @@ const RideHistory = () => {
             </View>
             
             <View style={tw`flex-row border-b border-blue-100`}>
-                    <Image
-                    style={{
-                        width:40,
-                        height:40,
-                        resizeMode:"contain"
-                    }}
-                    source={{
-                        uri:'https://iili.io/H9qbSdg.png'
-                    }}
+                    <Icon
+                        name = "truck-outline"
+                        type="material-community"
+                        color="green"
+                        size={35}
                     />
                     <Text style={tw`text-teal-700 text-lg w-100 pt-2`}>{origin.description}</Text>
             </View>
                 <View style={tw`flex-row border-b `}>
-                    <Image
+                <Icon
+                  
+                  name = "location-outline"
+                  type="ionicon"
+                  color="green"
+                  size={35}
+                />
+                    {/* <Image
                     style={{
                         width:40,
                         height:35,
@@ -63,7 +63,7 @@ const RideHistory = () => {
                     source={{
                         uri:'https://iili.io/H9qmCpj.png'
                     }}
-                    />
+                    /> */}
                     <Text style={tw`text-teal-700 text-lg text-left  w-90 pt-4`}>{destination.description}</Text>
             </View>
                 
@@ -84,7 +84,8 @@ const RideHistory = () => {
             
             <View style={tw`justify-between flex-row mt-2 border-b border-zinc-300 `}>
                 <Text style={text1}>UPDATE STATUS</Text>
-                <View >
+                <Text style={text2}>Picked Up</Text>
+                {/* <View >
                     <SelectDropdown
                         disabled={!progress}
                         buttonStyle={tw`bg-green-700  h-10 w-30`}
@@ -106,7 +107,7 @@ const RideHistory = () => {
                             return item
                         }}
                     />
-                </View>
+                </View> */}
                 
             </View>
             

@@ -3,7 +3,7 @@ import React from 'react'
 import RideHistory from './inProgress';
 import { useSelector } from 'react-redux';
 import { selectDestination, selectProgress } from '../../slices/navSlice';
-
+import tw from "twrnc"
 
 const ProgressComp = () => {
   const progress = useSelector(selectProgress)
@@ -15,7 +15,7 @@ const ProgressComp = () => {
     else
     {
       return (
-        <Text>START A TRIP FIRST</Text>
+        <Text style={tw`text-center font-bold text-3xl p-30`}>START A TRIP FIRST</Text>
       );
     }
 }

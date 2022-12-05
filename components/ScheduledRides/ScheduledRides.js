@@ -7,8 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import {selectDestination, selectProgress, setDestination, setJobNo, setJobStatus, setOrigin, setProgress} from "../../slices/navSlice.js";
 import { TouchableOpacity } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
-import confirmTrip from './confirmTrip.js';
-import scheduledTrips from './scheduledTrips.js';
+
 
 
 
@@ -62,29 +61,22 @@ const RideHistory = () => {
             </View>
             
             <View style={tw`flex-row border-b border-blue-100`}>
-                    <Image
-                    style={{
-                        width:40,
-                        height:40,
-                        resizeMode:"contain"
-                    }}
-                    source={{
-                        uri:'https://iili.io/H9qbSdg.png'
-                    }}
+                    <Icon
+                        name = "truck-outline"
+                        type="material-community"
+                        color="green"
+                        size={35}
                     />
                     <Text style={tw` text-sm pt-2`}>{item.origin}</Text>
             </View>
                 <View style={tw`flex-row`}>
-                    <Image
-                    style={{
-                        width:40,
-                        height:35,
-                        resizeMode:"contain"
-                    }}
-                    source={{
-                        uri:'https://iili.io/H9qmCpj.png'
-                    }}
-                    />
+                <Icon
+                  
+                  name = "location-outline"
+                  type="ionicon"
+                  color="green"
+                  size={35}
+                />
                     <Text style={tw` text-sm pt-2`}>{item.destination}</Text>
                     
                 </View>
